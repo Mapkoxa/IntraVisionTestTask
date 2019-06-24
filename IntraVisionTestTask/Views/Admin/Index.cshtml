@@ -1,0 +1,67 @@
+﻿@using IntraVisionTestTask.Models
+@model IEnumerable<IntraVisionTestTask.Models.CanOfDrinkViewModel>
+
+@{
+    ViewBag.Title = "Администрирование";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Администрирование</h2>
+
+@{ Html.RenderPartial("CanOfDrinkAddForm", (CanOfDrinkViewModel)ViewBag.Model);}
+<hr />
+
+@foreach (var model in Model)
+{
+    using (Html.BeginForm("Edit", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(a => model.Id);
+        @Html.HiddenFor(a => model.ImageName);
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="col-md-3">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        @Html.DisplayNameFor(a => a.Name)
+                    </span>
+                    @Html.EditorFor(a => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                @Html.ValidationMessageFor(a => model.Name, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-3">
+                <div class="input-group">
+                    <span class="input-group-addon">@Html.DisplayNameFor(a => a.Price)</span>
+                    @Html.EditorFor(a => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                @Html.ValidationMessageFor(a => model.Price, "", new { @class = "text-danger" })
+            </div>
+           
+            <div class="col-md-3">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        @Html.DisplayNameFor(a => a.Count)
+                    </span>
+                    @Html.EditorFor(a => model.Count, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                @Html.ValidationMessageFor(a => model.Count, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-2">
+                <div class="input-group">
+                    <div class="image-upload">
+                        <label for="image@(model.Id)">
+                            <img src="~/Content/img/@(model.ImageName)"  style="max-height: 100px;max-width:100px" alt="@Html.DisplayNameFor(a => a.ImageName)" />
+                        </label>
+                        <input id="image@(model.Id)" type="file" name="Image" class="input-files" accept="image/*" />
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(a => model.Image, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-1">
+                <input type="submit" value="Обновить" class="btn btn-default" />
+                @Html.ActionLink("Удалить", "Delete", new { id = model.Id }, new { @class = "btn btn-default" })
+            </div>
+        </div>
+    }
+    <hr />
+}

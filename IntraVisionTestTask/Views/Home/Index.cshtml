@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row" style="padding-top:50px">
+    <div class="col-md-2">
+        @Html.ActionLink("Рубль","Insert","Home",new { count=1},null)
+    </div>
+    <div class="col-md-2">
+        @Html.ActionLink("Рубль", "Insert", "Home", new { count = 2 }, null)
+    </div>
+    <div class="col-md-2">
+        @Html.ActionLink("Рубль", "Insert", "Home", new { count = 5 }, null)
+    </div>
+    <div class="col-md-2">
+        @Html.ActionLink("Рубль", "Insert", "Home", new { count = 10 }, null)
+    </div>
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-2">
+        @Html.ActionLink("Рубль", "Deliver", "Home", new { count = 10 }, null)
+    </div>
+</div>
